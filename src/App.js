@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import {injected} from "./components/wallet/connectors"
+import {useWeb3React} from "@web3-react/core"
+import {Web3ReactProvider , getWeb3ReactConttext} from "@web3-react/core"
+import {Web3Provider} from "@ethersproject/providers"
+import {ethers,contract} from "ethers"
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+export default function App(){
+
+  const InteractiveArea = ()=>{
+    const context = useWeb3React()
+    const {chainId, provider, account ,active, activate, deactivate} = context
+    
+
+    const connectwallet = ()=>{
+      activate(injected)
+    }
+  
+    const disconnectWallet = ()=>{
+      deactivate(injected)
+    }
+  
+    return(
+      <div>
+      <button onClick = {() => {activate(injected)}}>Connect Wallet</button>
+      {active ? (<div>connected: {account}</div>): (<div>Not connected</div>)}
+      <button onClick = {() => {deactivate()}}>Disconnect Wallet</button>
+      
     </div>
-  );
-}
 
-export default App;
+    )
+  }
+  //
+  function getLibraryf(provider) {
+    const library = new Web3Provider(provider);
+    library.pollingInterval = 12000;
+    return library;
+  }
+  return (
+    <Web3ReactProvider getLibrary={getLibraryf}>
+      <InteractiveArea />
+    </Web3ReactProvider>
+  )
+  
+  }
+
