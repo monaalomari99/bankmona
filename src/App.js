@@ -10,7 +10,7 @@ export default function App(){
 
   const InteractiveArea = ()=>{
     const context = useWeb3React()
-    const {chainId, provider, account ,active, activate, deactivate} = context
+    const {chainId, provider ,account,active, activate, deactivate} = context
     
 
     const connectwallet = ()=>{
@@ -23,6 +23,7 @@ export default function App(){
   
     return(
       <div>
+
       <button onClick = {() => {activate(injected)}}>Connect Wallet</button>
       {active ? (<div>connected: {account}</div>): (<div>Not connected</div>)}
       <button onClick = {() => {deactivate()}}>Disconnect Wallet</button>
