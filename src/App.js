@@ -63,7 +63,7 @@ export default function App() {
           "type": "function"
         }
       ]
-      const cAddr = "0x53043A039eC996928523a3875037073dB4A2a210"
+      const cAddr = "0x3A45A414bECFfF5ab75ba3B347b3e732d7581a1B"
 
       const getReadOnlyContract = () => {
         const provider = new ethers.providers.Web3Provider(window.ethereum) //in doc
