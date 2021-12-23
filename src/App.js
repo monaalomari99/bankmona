@@ -8,41 +8,36 @@ import React from 'react'
 
 export default function App(){
 
-  const InteractiveArea = ()=>{
+  const InteractiveArea = () => {
     const context = useWeb3React()
-    const {chainId, provider ,account,active, activate, deactivate} = context
+    const {chainId, provider, account, active, library, activate, deactivate} = context
+    //const WalletAddress = address
     
-
-    const connectwallet = ()=>{
+    const connectwallet = () => {
       activate(injected)
     }
-  
-    const disconnectWallet = ()=>{
+    const disconnectWallet = () => {
       deactivate(injected)
     }
-  
     return(
       <div>
-
-      <button onClick = {() => {activate(injected)}}>Connect Wallet</button>
-      {active ? (<div>connected: {account}</div>): (<div>Not connected</div>)}
-      <button onClick = {() => {deactivate()}}>Disconnect Wallet</button>
-      
-    </div>
-
+        <button onClick={() => {activate (injected)}}>Connect Wallet</button>
+        {active ? (<div>connected: {account} </div>): (<div>Not connected</div>)}
+        <button onClick = {() => {deactivate()}} > Disconnect Wallet </button>
+      </div>
     )
   }
-  //
-  function getLibraryf(provider) {
+  function getLibraryf (provider) {
     const library = new Web3Provider(provider);
     library.pollingInterval = 12000;
     return library;
   }
   return (
-    <Web3ReactProvider getLibrary={getLibraryf}>
+    <Web3ReactProvider getLibrary = {getLibraryf} >
       <InteractiveArea />
     </Web3ReactProvider>
   )
   
-  }
+}
+
 
